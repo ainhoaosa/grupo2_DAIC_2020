@@ -1,6 +1,6 @@
 # grupo2_DAIC_2020
 ## Table of contents
-* [Project Name](#Project name)
+* [Project name](#Project_name)
 * [Description](#Description)
 * [Installation](#Installation)
 * [Usage](#Usage)
