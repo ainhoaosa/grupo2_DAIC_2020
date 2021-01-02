@@ -6,7 +6,7 @@
 * [Usage](#Usage)
 * [Contributing](#Contributing)
 ## Project name
-
+SISTEMA INTELIGENTE DE MONITOREO Y CONTEO DE PERSONAS
 	
 ## Description
 
