@@ -6,12 +6,14 @@ import math
 import sys
 import time
 from grove.adc import ADC
- 
+import pytz
+from influxdb import InfluxDBClient
 sonar = GroveUltrasonicRanger(5)
 boton_pin = 18
 tiempo=0
 button = Factory.getButton("GPIO-HIGH", boton_pin)
 contador=0
+client = InfluxDBClient('localhost', 8086, 'root', 'root', 'cerradura')
 class GroveGasSensorMQ2:
  
     def __init__(self, channel):
@@ -49,5 +51,22 @@ while True:
             contador= contador-1
     tiempo=0
     print('Gas value: {0}'.format(sensor.MQ2))
+    gas= sensor.MQ2
     print(contador)
+    json_data = [{
+        "measurement": "contador",
+        "time": d1,
+        "fields": {
+            "value": contador
+        }
+    }]
+    client.write_points(json_data)
+    json_data = [{
+        "measurement": "co2",
+        "time": d1,
+        "fields": {
+            "value": gas
+        }
+    }]
+    client.write_points(json_data)
     time.sleep(1)
