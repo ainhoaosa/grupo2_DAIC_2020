@@ -10,7 +10,8 @@ import pytz
 from influxdb import InfluxDBClient
 sonar = GroveUltrasonicRanger(5)
 boton_pin = 18
-
+emergencia_pin= 16
+emergencia= Factory.getButton("GPIO-HIGH", emergencia_pin)
 button = Factory.getButton("GPIO-HIGH", boton_pin)
 
 global maxi
@@ -57,7 +58,7 @@ def main():
     aforo()
     maxi= int(maxi*(porcentaje/100))
     print(maxi)
-    while True:
+    while emergencia.is_pressed()==0:
         
         distancia = sonar.get_distance()
         d1 = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
@@ -117,5 +118,8 @@ def main():
             }]
         client.write_points(json_data)
         time.sleep(0.5)
+        while emergencia.is_pressed():
+            print("Emergencia cerradura abierta")
+            contador = 0
 if __name__ == '__main__':
     main()
