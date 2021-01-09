@@ -8,6 +8,7 @@ import time
 from grove.adc import ADC
 import pytz
 from influxdb import InfluxDBClient
+import servo_vf
 sonar = GroveUltrasonicRanger(5)
 boton_pin = 18
 emergencia_pin= 16
@@ -18,6 +19,7 @@ global maxi
 maxi = 30
 global porcentaje
 porcentaje = 60
+estado = 0
 client = InfluxDBClient('localhost', 8086, 'root', 'root', 'cerradura')
 def aforo():
     global porcentaje
@@ -116,10 +118,29 @@ def main():
                 "value": maxi
             }
             }]
+        
+        estado = servo_vf.cambio(contador, maxi)
+        client.write_points(json_data)
+        json_data = [{
+            "measurement": "estado",
+            "time": d1,
+            "fields": {
+                "value": estado
+            }
+            }]
         client.write_points(json_data)
         time.sleep(0.5)
         while emergencia.is_pressed():
             print("Emergencia cerradura abierta")
             contador = 0
+            estado = servo_vf.cambio(contador, maxi)
+            json_data = [{
+            "measurement": "estado",
+            "time": d1,
+            "fields": {
+                "value": estado
+            }
+            }]
+            client.write_points(json_data)
 if __name__ == '__main__':
     main()
