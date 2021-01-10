@@ -13,7 +13,7 @@ Se ha diseñado un sistema que simula el monitoreo de aforo de un local cuya ent
 
 La detección de acceso de una persona se realiza mediante un sensor ultrasonidos HC04. La detección de salida de una persona se realiza mediante la simulación de una pulsación de un boton fisico.
 
-El bloqueo o apertura de la cerradura se simula mediante un servo controloda electronicamente.
+El bloqueo o apertura de la cerradura se simula mediante un servo controlodo electronicamente.
 
 La cerradura de la puerta se bloquea cuando se llega al límite máximo de ocupación y no permite su apertura hasta que el numero de personas sea inferior al limite preestablecido.
 
