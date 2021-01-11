@@ -44,5 +44,6 @@ Pines Digitales:
 Pines Analógicos:
 
 	A0 -> Sensor CO2
+https://drive.google.com/file/d/1NXAzSyq_qyL8jcXzbhewRYcFeiPPyoVz/view?usp=sharing
 ## Usage
 ## Contributing:
